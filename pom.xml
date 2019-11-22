@@ -95,6 +95,9 @@
 		<license.copyrightOwners>University of Lausanne and
 			Swiss Federal Institute of Technology Lausanne (EPFL),
 			Switzerland</license.copyrightOwners>
+
+		<!-- NB: Deploy releases to the SciJava Maven repository. -->
+		<releaseProfiles>deploy-to-scijava</releaseProfiles>
 	</properties>
 
 	<dependencies>

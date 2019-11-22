@@ -1,3 +1,26 @@
+/*-
+ * #%L
+ * PixFRET
+ * %%
+ * Copyright (C) 2005 - 2019 University of Lausanne and
+ * 			Swiss Federal Institute of Technology Lausanne (EPFL),
+ * 			Switzerland
+ * %%
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public
+ * License along with this program.  If not, see
+ * <http://www.gnu.org/licenses/gpl-3.0.html>.
+ * #L%
+ */
 package pixfret;
 
 /**
@@ -13,7 +36,7 @@ public class Cholesky {
 
     /**
      * Given a positive-definite symmetric matrix A[1..n][1..n], this method
-     * constructs its Cholesky decomposition, A = L · L' . On input, only the
+     * constructs its Cholesky decomposition, A = L &sdot; L' . On input, only the
      * upper triangle of a need be given; it is not modified. The Cholesky
      * factor L is returned in the lower triangle of a, except for its diagonal
      * elements which are returned in p[1..n].
@@ -56,7 +79,7 @@ public class Cholesky {
         int n = A.length;
         int i, k;
         double sum;
-        //Solve L · y = b, storing y in x.
+        //Solve L â‹… y = b, storing y in x.
         for (i = 0; i < n; i++) {
             sum = b[i];
             for (k = i - 1; k >= 0; k--) {
@@ -65,7 +88,7 @@ public class Cholesky {
             x[i] = sum / p[i];
         }
 
-        //Solve L' · x = y.
+        //Solve L' â‹… x = y.
         for (i = n - 1; i >= 0; i--) {
             sum = x[i];
             for (k = i + 1; k < n; k++) {

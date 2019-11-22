@@ -1,3 +1,26 @@
+/*-
+ * #%L
+ * PixFRET
+ * %%
+ * Copyright (C) 2005 - 2019 University of Lausanne and
+ * 			Swiss Federal Institute of Technology Lausanne (EPFL),
+ * 			Switzerland
+ * %%
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public
+ * License along with this program.  If not, see
+ * <http://www.gnu.org/licenses/gpl-3.0.html>.
+ * #L%
+ */
 package pixfret;
 
 import ij.*;
@@ -22,7 +45,7 @@ import java.awt.image.*;
 *
 */
 	
-public class ImageAccess {
+public class PixFretImageAccess {
 
 	public float pixels[] = null;		// store the pixel data
 	private int nx = 0;					// size in X axis
@@ -33,7 +56,7 @@ public class ImageAccess {
 	private double logTolerance = Math.log(tolerance);
 
 	/**
-	* Creates a new object of the class ImageAccess from an 
+	* Creates a new object of the class PixFretImageAccess from an 
 	* ImageProcessor object.
 	*
 	* ImageProcessor object contains the image data, the size and 
@@ -42,7 +65,7 @@ public class ImageAccess {
 	*
 	* @param ip    an ImageProcessor object provided by ImageJ
 	*/
-	public ImageAccess(ImageProcessor ip) {
+	public PixFretImageAccess(ImageProcessor ip) {
 		if (ip == null) 
 			throw new 
 				ArrayStoreException("Constructor: ImageProcessor == null.");
@@ -74,7 +97,7 @@ public class ImageAccess {
 
 
 	/**
-	* Creates a new object of the class ImageAccess.
+	* Creates a new object of the class PixFretImageAccess.
 	*
 	* The size of the image are given as parameter.
 	* The data pixels are empty and are not initialized.
@@ -82,7 +105,7 @@ public class ImageAccess {
 	* @param nx       	the size of the image along the X-axis
 	* @param ny       	the size of the image along the Y-axis
 	*/
-	public ImageAccess(int nx, int ny) {
+	public PixFretImageAccess(int nx, int ny) {
 		if (nx < 1)
 			throw new 
 				ArrayStoreException("Constructor: nx < 1.");
@@ -114,7 +137,7 @@ public class ImageAccess {
 	}
 
 	/**
-	* Return the maximum value of ImageAccess.
+	* Return the maximum value of PixFretImageAccess.
 	*
 	* @return     	the minimum and maximum value
 	*/
@@ -147,19 +170,19 @@ public class ImageAccess {
 	}
 
 	/**
-	* Create a new ImageAccess object by duplication of the current the 
-	* ImageAccess object.
+	* Create a new PixFretImageAccess object by duplication of the current the 
+	* PixFretImageAccess object.
 	*
-	* @return   a new ImageAccess object
+	* @return   a new PixFretImageAccess object
 	**/
-	public ImageAccess duplicate() {
-		ImageAccess ia = new ImageAccess(nx, ny);
+	public PixFretImageAccess duplicate() {
+		PixFretImageAccess ia = new PixFretImageAccess(nx, ny);
 		System.arraycopy(pixels, 0, ia.pixels, 0, size);
 		return ia;
 	}
 
 	/**
-	* An ImageAccess object calls this method for getting
+	* An PixFretImageAccess object calls this method for getting
 	* the gray level of a selected pixel.
 	*
 	* Mirror border conditions are applied.
@@ -169,7 +192,7 @@ public class ImageAccess {
 	* @return     	the gray level of the pixel (float) 
 	*/
 	public float getPixel(int x, int y) {
-		int periodx = 2*nx-2;
+/*		int periodx = 2*nx-2;
 	 	int periody = 2*ny-2;
 		if (x<0) {			
 			while (x<0) x += periodx;		// Periodize	
@@ -187,11 +210,12 @@ public class ImageAccess {
 			while (y>=ny) y -= periody;		// Periodize	
 			if (y < 0) y = -y;				// Symmetrize
 	 	}
+*/
 		return pixels[x+y*nx];
 	}
 
 	/**
-	* An ImageAccess object calls this method for getting a 
+	* An PixFretImageAccess object calls this method for getting a 
 	* whole column of the image.
 	*
 	* The column should already created with the correct size [ny].
@@ -215,7 +239,7 @@ public class ImageAccess {
 	}
 
 	/**
-	* An ImageAccess object calls this method for getting a 
+	* An PixFretImageAccess object calls this method for getting a 
 	* whole row of the image.
 	*
 	* The row should already created with the correct size [nx].
@@ -237,7 +261,7 @@ public class ImageAccess {
 	}
 
 	/**
-	* An ImageAccess object calls this method for getting a neighborhood
+	* An PixFretImageAccess object calls this method for getting a neighborhood
 	* arround a pixel position.
 	*
 	* The neigh parameter should already created. The size of the array 
@@ -323,7 +347,7 @@ public class ImageAccess {
 	}
 
 	/**
-	* An ImageAccess object calls this method in order a value
+	* An PixFretImageAccess object calls this method in order a value
 	* of the gray level to be put to a position inside it
 	* given by the coordinates.
 	*
@@ -344,7 +368,7 @@ public class ImageAccess {
 	}
 
 	/**
-	* An ImageAccess object calls this method to put a whole 
+	* An PixFretImageAccess object calls this method to put a whole 
 	* column in a specified position into the image.
 	*
 	* @param x       	input, the integer x-coordinate of a column
@@ -366,7 +390,7 @@ public class ImageAccess {
 	}
 
 	/**
-	* An ImageAccess object calls this method to put a whole 
+	* An PixFretImageAccess object calls this method to put a whole 
 	* row in a specified position into the image.
 	*
 	* @param y       input, the integer x-coordinate of a column
@@ -437,7 +461,7 @@ public class ImageAccess {
   	* Gaussian Smoothing.
   	*/
 	public void smoothGaussian(float sigma) {
-		ImageAccess source = duplicate();
+		PixFretImageAccess source = duplicate();
 		float N = 3.0f;
 		float poles[] = new float[3];
 		float s2 = sigma * sigma;
@@ -508,6 +532,6 @@ public class ImageAccess {
 		return((z * c[c.length - 2] + c[c.length - 1]) * z / (z * z - 1.0f));
 	}
 
-} // end of class ImageAccess
+} // end of class PixFretImageAccess
 
 

@@ -11,7 +11,7 @@
 
 	<groupId>ch.fmi</groupId>
 	<artifactId>PixFRET_</artifactId>
-	<version>1.5.2-SNAPSHOT</version>
+	<version>1.5.3-SNAPSHOT</version>
 
 	<name>PixFRET</name>
 	<description>An ImageJ plug-in for FRET calculation which can accommodate variations in spectral bleed-throughs.</description>
